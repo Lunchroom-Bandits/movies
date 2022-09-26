@@ -14,7 +14,7 @@ import java.util.Collection;
 @Entity
 @Table
 
-public class Post {
+public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,29 +23,27 @@ public class Post {
     private String title;
 
     @Column(nullable = false, length = 1024)
-    private String content;
+    private String rating;
 
+    @Column(nullable = false, length = 1024)
+    private String director;
 
-
-    @ManyToOne
-    @JsonIgnoreProperties({"posts", "password"})
-    private User author;
+//    @Column(nullable = false, length = 1024)
+//    private String genre;
 
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.REFRESH},
-            targetEntity = Category.class)
+            targetEntity = Genre.class)
     @JoinTable(
-            name="post_category",
-            joinColumns = {@JoinColumn(name = "post_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name="category_id", nullable = false, updatable = false)},
+            name="movie_genres",
+            joinColumns = {@JoinColumn(name = "movie_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="genre_id", nullable = false, updatable = false)},
             foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
-    @JsonIgnoreProperties("post")
-    private Collection<Category> categories;
-
-
+    @JsonIgnoreProperties("movies")
+    private Collection<Genre> genres;
 
 
 

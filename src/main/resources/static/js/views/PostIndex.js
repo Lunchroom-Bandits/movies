@@ -1,12 +1,12 @@
 import createView from "../createView.js";
 import {getHeaders} from "../auth.js";
-import createPost from "./createPost.js";
+import createMovie from "./createMovie.js";
 
 export default function PostIndex(props) {
     return `
     <div class="blue">
         <header>
-            <h1>Posts Page</h1>
+            <h1>Movies Page</h1>
         </header>
         <main>
             <div>
@@ -15,16 +15,16 @@ export default function PostIndex(props) {
                <h6 id="author"></h6>
             </div>
         </main>
-        <a data-link href="/create-post">Create a post</a><br>
+        <a data-link href="/create-post">Add a movie</a><br>
     </div>   
     `;
 }
 
 export function postEvents() {
     async function posts(response) {
-        let currentPosts = await response.json()
+        let currentMovies = await response.json()
         console.log(response)
-        console.log(currentPosts)
+        console.log(currentMovies)
 
         let title = document.getElementById("title")
         let content = document.getElementById("content")
@@ -32,20 +32,19 @@ export function postEvents() {
 
         let html = ` <div class="container">`;
 
-        for (let i = 0; i < currentPosts.length; i++) {
+        for (let i = 0; i < currentMovies.length; i++) {
 
-            html += `
-
-                        <div>
-                        <table class="table table-dark">
+            html +=  `
+                          <div>
+                        <table class="table table-success table-striped">
   <thead>
     
   </thead>
   <tbody>
   <th>Title</th>
-   <th>Content</th>
-    <th>Category</th>
-     <th>Author</th>
+   <th>Director</th>
+    <th>Genre</th>
+     <th>Rating</th>
     <tr class="table-active">
     
     </tr>
@@ -53,34 +52,54 @@ export function postEvents() {
       
     </tr>
     <tr>
-      <th scope="row">${currentPosts[i].title}</th>
-      <th colspan="1" class="table-active">${currentPosts[i].content}</th>
-      <th scope="row">${currentPosts[i].categories[0].name}</th>
-      <th colspan="1" class="table-active" >${currentPosts[i].author.userName}</th>
+      <th scope="row">${currentMovies[i].title}</th>
+      <th colspan="1" class="table-active">${currentMovies[i].director}</th>
+      <th scope="row">${currentMovies[i].genre}</th>
+      <th colspan="1" class="table-active" >${currentMovies[i].rating}</th>
     </tr>
         <input type="button" value="❌" style="width: 40px;border-radius: 20px" id="delete">
         <input type="button" value="✏️" style="width: 40px;border-radius: 20px; float: left;" id="edit">
   </tbody>
 </table>
+
                        
-            
-              
-                     
-                       
-                        
-                
-                    
-                    </div>
+            </div>
                 `
 
         }
-
         author.innerHTML = html + `
                 </div>
             `
 
+            //
+            // let getMovie = {
+            //     method: "Get",
+            //     headers: getHeaders(),
+            //     body:JSON.stringify(searchBar)
+            //
+            // }
+            //
+            // fetch("http://localhost:8080/api/genres/search", getMovie)
+            //     .then(function (response) {
+            //         if (!response.ok) {
+            //             console.log("movie was not created " + response.status)
+            //         } else {
+            //             console.log("movie created");
+            //             createView('/movies');
+            //         }
+            //     });
+            //
+            //
+            //
+            //
+            //
+
+
+
+
+
         let deleteButton = document.querySelectorAll("#delete");
-        for (let i = 0; i < currentPosts.length; i++) {
+        for (let i = 0; i < currentMovies.length; i++) {
             deleteButton[i].addEventListener("click", function (event){
 
                 let deletePost = {
@@ -89,52 +108,58 @@ export function postEvents() {
 
                 }
 
-                let id = currentPosts[i].id
+                let id = currentMovies[i].id
 
-                fetch(`http://localhost:8080/api/posts/${id}`, deletePost)
+                fetch(`http://localhost:8080/api/movies/${id}`, deletePost)
                     .then(function(response) {
                         if(!response.ok) {
-                            console.log("post deletion error: " + response.status);
+                            console.log("movies deletion error: " + response.status);
                         } else {
-                            console.log("post delete");
-                            createView('/posts');
+                            console.log("movie deleted");
+                            createView('/movies');
                         }
                     });
             })
         }
 
         let editButton = document.querySelectorAll("#edit");
-        for (let i = 0; i < currentPosts.length; i++) {
+        for (let i = 0; i < currentMovies.length; i++) {
             editButton[i].addEventListener("click", function (event) {
-
-               createPost()
+                  createView('/edit');
                 let newTitle = prompt("enter title")
                 let newContent = prompt("enter content")
+
+                let m = {
+                    title: newTitle,
+                    director: newContent,
+                    genre: newTitle,
+                    rating: newContent
+                }
 
 
 
                 let editPost = {
                     method: "PATCH",
                     headers: getHeaders(),
-                    body: JSON.stringify({title: newTitle, content: newContent})
+                    body: JSON.stringify(m)
                 }
 console.log(editPost);
 
-console.log(currentPosts);
+console.log(currentMovies);
 
 
-                let id = currentPosts[i].id;
+                let id = currentMovies[i].id;
 
-                fetch(`http://localhost:8080/api/posts/${id}`, editPost)
+                fetch(`http://localhost:8080/api/movies/${id}`, editPost)
                     .then(function (response) {
                         if (!response.ok) {
                             console.log("post editing error: " + response.status);
                         } else {
                             console.log("post updated");
-                            createView('/posts');
+                            createView('/movies');
                         }
                     });
-
+//
             })
         }
 
@@ -143,7 +168,7 @@ console.log(currentPosts);
         method: "GET",
         headers: getHeaders(),
     }
-        fetch("http://localhost:8080/api/posts", request)
+        fetch("http://localhost:8080/api/movies", request)
 
         .then(posts)
         .catch(function(error){

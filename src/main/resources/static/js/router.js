@@ -7,9 +7,10 @@ import Login from "./views/Login.js";
 import LoginEvent from "./auth.js";
 import Register from "./views/Register.js"
 import {RegisterEvent} from "./views/Register.js";
-import createPost, {createPostEvent} from "./views/createPost.js";
+import createMovie, {createPostEvent} from "./views/createMovie.js";
 import Logout, {LogoutEvents} from "./views/Logout.js";
 import custom404 from "./views/Custom404.js";
+import editMovie, {editMovieEvent} from "./views/EditMovie.js";
 
 
 /**
@@ -42,6 +43,17 @@ export default function router(URI) {
 
         },
 
+        '/edit': {
+            returnView: editMovie,
+            state: {
+                movies: '/api/movies',
+            },
+            uri: '/edit',
+            title: "Edit",
+            viewEvent: editMovieEvent
+        },
+
+
         '/logout': {
             returnView: Logout,
             state: {},
@@ -57,12 +69,12 @@ export default function router(URI) {
             title: 'Register',
             viewEvent: RegisterEvent
         },
-        '/posts': {
+        '/movies': {
             returnView: PostIndex,
             state: {
-                posts: '/api/posts',
+                movies: '/api/movies',
             },
-            uri: '/posts',
+            uri: '/movies',
             title: 'All Posts',
             viewEvent: postEvents
         },
@@ -86,7 +98,7 @@ export default function router(URI) {
         },
 
         "/create-post": {
-            returnView: createPost,
+            returnView: createMovie,
             state: {},
             uri: location.pathname,
             title: "Create post",

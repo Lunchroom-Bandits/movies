@@ -9,9 +9,9 @@ export default function render(props, route) {
     let body = document.getElementById("black-bg");
     if (route.backgroundColor) {
         body.setAttribute("style", `background-color: ${route.backgroundColor};`);
-        body.setAttribute("style",`color: white`)
+        body.setAttribute("style",`color: mediumspringgreen`)
     } else {
-        console.log("no bueno")
+
         body.setAttribute("style",`background-color:powderblue`);
     }
 

@@ -1,0 +1,150 @@
+
+:root {
+    --clr-neon: hsl(317 100% 54%);
+    --clr-bg: hsl(323 21% 16%);
+}
+
+.jalopy-nav {
+    margin-right: 1em;
+}
+.movieCard {
+    border: 3px solid lightgray;
+    text-wrap: normal;
+    /*border-radius: 10px;*/
+    /*overflow-y: scroll;*/
+    /*width: 50%;*/
+    /*height: 10px;*/
+    /*border-radius: 15px 15px 15px 15px;*/
+    background-color: white;
+    margin: 5em;
+}
+h1 {
+    text-align: center;
+    opacity: 0.7;
+    font-family: fantasy;
+
+}
+.movieCard:hover {
+    transform: translate(0, -20px);
+    box-shadow: 0 0 20px 0 aqua;
+    border-radius: 10px;
+    transition: 1s ease;
+}
+
+    /*content: "";*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*box-shadow: 0 0 2em 0.5em var(--clr-neon);*/
+    /*opacity: 0;*/
+    /*background-color: var(--clr-neon);*/
+    /*z-index: -1;*/
+    /*transition: opacity 100ms linear;*/
+
+
+/*#movieCard::before:hover {*/
+/*    pointer-events: none;*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    background: var(--clr-neon);*/
+/*    top: 120%;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+
+/*    transform: perspective(1em) rotateX(40deg) scale(1, 0.35);*/
+/*    filter: blur(1em);*/
+/*    opacity: 0.7;*/
+/*}*/
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 15px;
+    list-style: none;
+    font-family: "BM Hanna Air";
+    font-weight: bolder;
+    font-size: xxx-large;
+}
+.scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+.card {
+    display: inline-block;
+    width: 20vw;
+    /*height: 25vw;*/
+    /*text-wrap: inherit;*/
+    /*width: min-content;*/
+    opacity: 0.8;
+    overflow: scroll;
+    box-shadow: 0 0 10px 0 black;
+}
+html {
+    height: 100vh;
+
+}
+
+body {
+    height: 100%;
+    background-image: url("../assets/3840x2160-px-sunset-waves-1264277-wallhere.com.jpg");
+    background-repeat: no-repeat;
+    min-height: 90%;
+    display: flex;
+    justify-content: center;
+    background-attachment: fixed;
+    background-size: 225vh;
+    background-position: top right;
+}
+#movieH1 {
+    color: white;
+}
+
+#h1E {
+    color: darkblue;
+}
+
+
+nav {
+    max-width: 960px;
+    mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
+    margin: 0 auto;
+    padding: 60px 0;
+}
+
+nav ul {
+    /*display: flow;*/
+    text-align: center;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+nav ul li {
+    /*list-style: none;*/
+    display: inline-block;
+    /*text-align: center;*/
+}
+
+nav ul li a {
+    padding: 18px;
+    /*font-family: "Open Sans";*/
+    text-transform:uppercase;
+    color: darkblue;
+    font-size: 18px;
+    text-decoration: none;
+    display: block;
+}
+
+nav ul li a:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(0, 55, 122, 0.7);
+}
+.text-input {
+    min-width: min-content;
+}
+
